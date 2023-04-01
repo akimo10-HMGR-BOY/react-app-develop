@@ -8,6 +8,7 @@ function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [email, setEmail] = useState("");
+  const [token, setToken] = useState("");
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -29,6 +30,7 @@ function App() {
       const json = await response.json();
       const email = json.email;
       setEmail(email);
+      setToken(liff.getAccessToken());
     } catch (error) {
       console.error(error);
       setErrorMessage(error);
@@ -66,8 +68,9 @@ function App() {
             </div>
           </div>
         )}
-        {email !== "" ?? <p>{email}</p>}
-        {errorMessage !== "" ?? <p>{errorMessage}</p>}
+        <p>{token}</p>
+        <p>{email}</p>
+        <p>{errorMessage}</p>
       </div>
     </div>
   );
