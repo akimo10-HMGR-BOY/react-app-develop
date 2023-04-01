@@ -29,8 +29,8 @@ function App() {
       );
       const json = await response.json();
       console.log(json);
-      // const email = json.email;
-      // setEmail(email);
+      const email = json.email;
+      setEmail(email);
     } catch (error) {
       console.error(error);
       setErrorMessage(error);
@@ -68,6 +68,8 @@ function App() {
             </div>
           </div>
         )}
+        {email !== "" ?? <p>{{ email }}</p>}
+        {errorMessage !== "" ?? <p>{{ errorMessage }}</p>}
       </div>
     </div>
   );
