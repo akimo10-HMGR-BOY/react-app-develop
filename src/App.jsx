@@ -5,6 +5,14 @@ import "./App.css";
 
 function App() {
   const [count, setCount] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   return (
     <div className="App">
@@ -18,16 +26,25 @@ function App() {
       </div>
       <h1>React Test</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+        <button onClick={openModal}>LIFFログイン</button>
+        {isModalOpen && (
+          <div className="modal">
+            <div className="modal-content">
+              <button onClick={closeModal}>×</button>
+              <p>
+                「このアプリでは、LINEログインを使用してメールアドレスを取得します。
+                <br />
+                取得したメールアドレスは、アプリ内でのみ使用され、第三者に提供されることはありません。
+                <br />
+                LINEアカウントに登録されているメールアドレスが自動的に使用されます。
+                <br />
+                ログインすることで、上記の内容に同意したものと見なされます。」
+              </p>
+              <button>ログインする。</button>
+            </div>
+          </div>
+        )}
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </div>
   );
 }
