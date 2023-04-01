@@ -2,15 +2,39 @@ import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
+import liff from "@line/liff";
 
 function App() {
-  const [count, setCount] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [email, setEmail] = useState("");
 
   const openModal = () => {
     setIsModalOpen(true);
   };
   const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const onLineLogin = async () => {
+    console.log("onLineLogin");
+    try {
+      await liff.init({ liffId: "1657805697-LRX2n17a" });
+      if (!liff.isLoggedIn()) {
+        liff.login();
+      }
+      const userProfile = await liff.getProfile();
+      const response = await fetch(
+        `https://api.line.me/oauth2/v2.1/verify?access_token=${liff.getAccessToken()}`
+      );
+      const json = await response.json();
+      console.log(json);
+      // const email = json.email;
+      // setEmail(email);
+    } catch (error) {
+      console.error(error);
+      setErrorMessage(error);
+    }
     setIsModalOpen(false);
   };
 
@@ -40,7 +64,7 @@ function App() {
                 <br />
                 ログインすることで、上記の内容に同意したものと見なされます。」
               </p>
-              <button>ログインする。</button>
+              <button onClick={onLineLogin}>ログインする。</button>
             </div>
           </div>
         )}
