@@ -17,7 +17,6 @@ function App() {
   };
 
   const onLineLogin = async () => {
-    console.log("onLineLogin");
     try {
       await liff.init({ liffId: "1657805697-LRX2n17a" });
       if (!liff.isLoggedIn()) {
@@ -28,7 +27,6 @@ function App() {
         `https://api.line.me/oauth2/v2.1/verify?access_token=${liff.getAccessToken()}`
       );
       const json = await response.json();
-      console.log(json);
       const email = json.email;
       setEmail(email);
     } catch (error) {
@@ -68,8 +66,8 @@ function App() {
             </div>
           </div>
         )}
-        {email !== "" ?? <p>{{ email }}</p>}
-        {errorMessage !== "" ?? <p>{{ errorMessage }}</p>}
+        {email !== "" ?? <p>{email}</p>}
+        {errorMessage !== "" ?? <p>{errorMessage}</p>}
       </div>
     </div>
   );
