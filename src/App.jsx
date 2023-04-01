@@ -9,6 +9,7 @@ function App() {
   const [errorMessage, setErrorMessage] = useState("");
   const [email, setEmail] = useState("");
   const [token, setToken] = useState("");
+  const [idToken, setIdToken] = useState(null);
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -24,6 +25,8 @@ function App() {
         liff.login();
       }
       const userProfile = await liff.getProfile();
+      const idToken = await liff.getIDToken();
+      setIdToken(idToken);
       const response = await fetch(
         `https://api.line.me/oauth2/v2.1/verify?access_token=${liff.getAccessToken()}`
       );
@@ -71,6 +74,12 @@ function App() {
         <p>{token}</p>
         <p>{email}</p>
         <p>{errorMessage}</p>
+        {idToken && (
+          <div>
+            <p>{idToken.name}</p>
+            <p>{idToken.email}</p>
+          </div>
+        )}
       </div>
     </div>
   );
