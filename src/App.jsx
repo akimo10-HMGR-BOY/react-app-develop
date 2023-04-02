@@ -26,7 +26,9 @@ function App() {
       }
       const userProfile = await liff.getProfile();
       const idToken = await liff.getIDToken();
-      setIdToken(idToken);
+      console.log(idToken);
+      console.log(userProfile);
+      setIdToken({ name: idToken.name, email: idToken.email });
       const response = await fetch(
         `https://api.line.me/oauth2/v2.1/verify?access_token=${liff.getAccessToken()}`
       );
