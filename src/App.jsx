@@ -9,7 +9,7 @@ function App() {
   const [errorMessage, setErrorMessage] = useState("");
   const [email, setEmail] = useState("");
   const [token, setToken] = useState("");
-  const [idToken, setIdToken] = useState(null);
+  const [idToken, setIdToken] = useState({ name: "未取得", email: "未取得" });
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -74,12 +74,8 @@ function App() {
         <p>{token}</p>
         <p>{email}</p>
         <p>{errorMessage}</p>
-        {idToken && (
-          <div>
-            <p>{idToken.name}</p>
-            <p>{idToken.email}</p>
-          </div>
-        )}
+        <p>{idToken.name}</p>
+        <p>{idToken.email}</p>
       </div>
     </div>
   );
