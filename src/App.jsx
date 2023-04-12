@@ -20,9 +20,9 @@ const App = () => {
 };
 
 const PageWrapper = styled.div`
-  width: 100%;
   height: 100vh;
   margin: 80px 0 0 0;
+  padding: 40px;
   background-color: #282c34;
   text-align: center;
 `;
